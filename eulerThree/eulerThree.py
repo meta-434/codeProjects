@@ -13,32 +13,35 @@ def isPrime(a):
         if a % x == 0:
             return False
         return True
-#returns the largest factor of a given number.
+
+#returns the factors of a given number.
 #if given number is prime, returns 0
-#b - number to get largest factor.
-def largestFactors(b):
-    factors = []
+#b - number to factor.
+def factors(b):
+    listFactors = []
 
     for i in range(2, int(b**0.5)+1):
         if b%i == 0:
-            factors.append(int(b/i))
+            listFactors.append(int(b/i))
+            #listFactors.append(int(i)) #for more context de-comment
 
-    if len(factors) == 0:
-        print("number is prime... factors are 1 and itself.")
-        return 0
-    else:
-        for j in range(0, len(factors)):
-            if len(factors) == 1:
-                #print(max(factors))
-                return int(factors[j])
-            else:
-                #print(max(factors))
-                return max(factors)
-
+    return listFactors
+    
+#main function. calls isPrime on factors list result to filter
+#and max() to determine greatest prime factor from user input.
 def main():
-    number = input('Enter number to test: ')
-    #print (isPrime(number))
-    largestFactors(number)
+    number = int(input('Enter number to test: '))
+    listNumber = factors(number)
 
+    if len(listNumber) == 0:
+        print("input is prime. largest prime factor is %d." % number)
+    else:
+        for z in range(0, len(listNumber)):
+            if isPrime(listNumber[z]) == False:
+                listNumber.pop([z])
+
+        print("largest prime factor is %d" % int(max(listNumber)))
+
+# main execution conditional
 if __name__ == "__main__":
     main()
