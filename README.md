@@ -13,4 +13,4 @@ repo for project Euler coding practice.
 | :---: | --- | --- | --- | --- |
 | [1](https://projecteuler.net/problem=1) | Done | WIP | No | No |
 | [2](https://projecteuler.net/problem=2) | Done | WIP | No | No |
-| [3](https://projecteuler.net/problem=3) | [Done] (../eulerThree/eulerThree.py) | [Done](../eulerThree/test_eulerThree.py) | No | No | 
+| [3](https://projecteuler.net/problem=3) | [Done] (../eulerThree.py) | [Done](../test_eulerThree.py) | No | No | 
