@@ -1,13 +1,13 @@
 # codeProjects
 
 In general, my process will be
-  1. Python Solution
-  2. Python Tests
-  3. Java Solution (conversion)
-  4. Java Tests
+	1. Python Solution
+	2. Python Tests
+	3. Java Solution (conversion)
+	4. Java Tests
 
 repo for project Euler coding practice.
-  ### Current Status:
+	### Current Status:
 
 | Problem # | Python Solution | Python Tests | Java Solution | Java Tests |
 | :---: | --- | --- | --- | --- |
