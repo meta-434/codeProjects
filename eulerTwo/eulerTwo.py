@@ -1,5 +1,4 @@
-def main():
-
+def fibbFinder():
     index = 1
     total = 0
     fibb = [1, 1]
@@ -12,7 +11,11 @@ def main():
     for x in fibb:
         if x%2 == 0:
             total += x
-    print(total)
+    return int(total)
+
+def main():
+
+    print(fibbFinder())
 
 if __name__ == "__main__":
     main()
