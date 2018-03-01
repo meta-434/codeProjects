@@ -16,18 +16,20 @@ def reverse(y):
 
     return int(reverse)
 
+#NOT THE MOST OPTIMIZED WAY OF DOING THIS!!
 def palindromic():
 
     ans = max(i * j
-        for i in range(100, 1000, 2)
-        for j in range(100, 1000, 2))
+        for i in range(100, 1000)
+        for j in range(100, 1000)
+        if str(i * j) == str(i * j)[ : : -1])
 
-    return int(ans)
+    return str(ans)
+
 #------------------------------------------------------
 def main():
 
     print(palindromic())
-    print('lmao')
 
 if __name__ == "__main__":
     main()
