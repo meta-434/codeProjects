@@ -1,10 +1,12 @@
 # codeProjects
 
 In general, my process will be
-	1. Python Solution
-	2. Python Tests
-	3. Java Solution (conversion)
-	4. Java Tests
+* Python Solution
+* Python Tests
+* Java Solution (conversion)
+* Java Tests
+
+except for problems 4 and 7, which will also have a Clojure solution.  
 
 repo for project Euler coding practice.
 
