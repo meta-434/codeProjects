@@ -11,7 +11,7 @@ def main():
         else:
             x += 1
 
-    print(y)
+    return(y)
 
 if __name__ == "__main__":
-    main()
+    print(main())
