@@ -23,3 +23,4 @@ Current Status:
 To-Do
 =====
 1. Make more comprehensive Tests
+  + Code test coverage % increase?
