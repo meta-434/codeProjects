@@ -11,5 +11,8 @@ class TestEulerFour(unittest.TestCase):
         given = int(eulerFour.palindromic())
         reverse = int(eulerFour.reverse(eulerFour.palindromic()))
         self.assertEqual(given, reverse)
+
+        self.assertEqual(given, 906609)
+        
 if __name__ == "__main__":
     unittest.main()
