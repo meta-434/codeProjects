@@ -1,6 +1,8 @@
 # codeProjects
 
 Ongoing repo. for project Euler coding practice.
+Exception to this is backupProj, while still a coding project, not a project
+Euler problem.
 
 In general, my process will be
 * Python Solution
@@ -8,7 +10,8 @@ In general, my process will be
 * Java Solution (conversion)
 * Java Tests
 
-except for problems 4 and 7, which will also have a Clojure solution (and tests).  
+except for problems 4 and 7, which will also have a Clojure solution (and tests)
+(one day, soon (tm)).  
 
 Current Status:
 ==============
@@ -21,7 +24,12 @@ Current Status:
 | [4](https://projecteuler.net/problem=4) | [Done](../master/euler4/eulerFour.py) | [WIP](../master/euler4/test_eulerFour.py) | No | No |
 | [7](https://projecteuler.net/problem=7) | [Done](../master/euler7/eulerSeven.py) | [No](../master/euler7/test_eulerSeven.py) | No | No |
 
+backupProj Updates:
+r0.1a - gathering user input (i.e. collection and validation of user specified
+  source and target filesystem locations.
+
 To-Do
 =====
 1. Make more comprehensive Tests
   + Code test coverage % increase?
+2. Add remote source and remote target implementation for backupProj.
