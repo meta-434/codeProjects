@@ -8,13 +8,26 @@
 #4b. if backups should be placed somewhere else after disk is filled
 import os
 import platform
+import datetime
 import textwrap
 
-payload = ['/home/usr/alex/folder1','/home/usr/alex/folder2']
-source = 'thisisatest'
+build = 'r0.1.4a'
+now = datetime.datetime.now()
+
 lastBackup = '0000y/00m/00d 00h:00m.00s'
 
+class BackupItem:
+
+    def __init__(self, name, source, target, lastBackup, isRemote):
+        self.version = version
+        self.source = source
+        self.target = target
+        self.lastBackup = lastBackup
+        self.isRemote = isRemote
+
 def startUp():
+    global build
+
     print('#' * 80)
     print('#     '' _             ______ _     _                       ______  __       ''    #\n'
           '#     ''| |      /\   / _____) |   | |                     / __   |/  |      ''    #\n'
@@ -28,17 +41,37 @@ def startUp():
     print('#' * 80)
 
     print('\nSystem platform is ++%s++ running release ++%s++.\n' % (platform.system(), platform.release()))
+    print('current build is %s' % build)
 
 def getUserPref():
-    global source
-    whereSource = ''
+    locSource = ''
+    locisRemote = False
+    locTarget = ''
+
+    prefs = input('Is there a prefs.txt file to import? y/N: ')
+
+    if prefs == 'y' or prefs == 'Y':
+        locPrefsLoc = 
+
     whereSource = input('Is source on a local disk? y/N: ')
     if whereSource == 'y' or whereSource == 'Y':
-        source = input('Enter the full filepath to the source enclosing folder: ')
+
+        locisRemote = True
+        locSource = input('Enter the full filepath to the source enclosing folder: ')
+
     elif whereSource == 'n' or whereSource == 'N':
-        source = input('Enter full SSH address to source enclosing folder: ')
+
+        locisRemote = False
+        locSource = input('Enter full SSH address to source enclosing folder: ')
+
     else:
         print('only y/Y or n/N please.')
+
+    locTarget = input('Where should the folder be backed up to?: ')
+    locName = input('What shoudl the backup be called?')
+
+    locName = BackupItem(1, locSource, locTarget, now.isoformat(), locisRemote)
+
 
 def getSrcStatus():
     global source
@@ -56,6 +89,6 @@ def backup():
 def main():
     startUp()
     getUserPref()
-    getSrcStatus()
+    #getSrcStatus()
 if __name__ == "__main__":
     print(main())
