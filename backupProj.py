@@ -10,20 +10,23 @@ import os
 import platform
 import datetime
 import textwrap
+import string
+import random
 
-build = 'r0.1.4a'
+build = 'r0.1.5a'
 now = datetime.datetime.now()
 
-lastBackup = '0000y/00m/00d 00h:00m.00s'
-
 class BackupItem:
-
-    def __init__(self, name, source, target, lastBackup, isRemote):
+    def __init__(self, version, source, isSrcRemote, target, isTgtRemote, lastBackup):
         self.version = version
         self.source = source
+        self.isSrcRemote = isSrcRemote
         self.target = target
+        self.isTgtRemote = isTgtRemote
         self.lastBackup = lastBackup
-        self.isRemote = isRemote
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 def startUp():
     global build
@@ -43,52 +46,65 @@ def startUp():
     print('\nSystem platform is ++%s++ running release ++%s++.\n' % (platform.system(), platform.release()))
     print('current build is %s' % build)
 
-def getUserPref():
-    locSource = ''
-    locisRemote = False
-    locTarget = ''
+def init():
+    global now
+    locSrcPath = ''
+    locTgtPath = ''
+    locisSrcRemote = False
+    locisTgtRemote = False
+
 
     prefs = input('Is there a prefs.txt file to import? y/N: ')
-
     if prefs == 'y' or prefs == 'Y':
-        locPrefsLoc = 
+            #import, read file.
+        print('')
+    elif prefs == 'n' or prefs == 'N':
 
-    whereSource = input('Is source on a local disk? y/N: ')
-    if whereSource == 'y' or whereSource == 'Y':
+        whereSource = input('Is source on a local disk? y/N: ')
 
-        locisRemote = True
-        locSource = input('Enter the full filepath to the source enclosing folder: ')
+        if whereSource == 'y' or whereSource == 'Y':
 
-    elif whereSource == 'n' or whereSource == 'N':
+            locisSrcRemote = False
+            locSrcPath = input('Enter the full filepath to the source enclosing folder: ')
+            whereTarget = input('Is target on a local disk? y/N: ')
 
-        locisRemote = False
-        locSource = input('Enter full SSH address to source enclosing folder: ')
+            if whereTarget == 'y' or whereTarget == 'Y':
 
-    else:
-        print('only y/Y or n/N please.')
+                locTgtPath = input('Enter the full filepath to the target folder: ')
+                id_gen_hold = id_generator()
+                namer = str(id_gen_hold)
+                id_gen_hold = BackupItem(1, locSrcPath, locisSrcRemote, locTgtPath, locisTgtRemote, now.isoformat())
 
-    locTarget = input('Where should the folder be backed up to?: ')
-    locName = input('What shoudl the backup be called?')
+                with open('prefs.txt', 'a') as f:
+                    f.write('\n' + namer + ', '+ str(id_gen_hold.version) + ', ' + id_gen_hold.source + ', ' + str(id_gen_hold.isSrcRemote) + ', ' + id_gen_hold.target + ', ' + str(id_gen_hold.isTgtRemote) + ', ' + id_gen_hold.lastBackup)
 
-    locName = BackupItem(1, locSource, locTarget, now.isoformat(), locisRemote)
+        elif whereSource == 'n' or whereSource == 'N':
+
+            locisSrcRemote = True
+            locSrcPath = input('Enter full SSH address to source enclosing folder: ')
+
+
+            locTgtPath
+
+        else:
+
+            print('only y/Y or n/N please.')
+
+
 
 
 def getSrcStatus():
-    global source
     if os.path.exists(source) and os.path.isdir(source):
         print(os.listdir(source))
     else:
         print('source either does not exist or is not a folder.')
 
-def remoteConnection():
-    return 0
-
-def backup():
+def backup(isLoc):
     return 0
 
 def main():
     startUp()
-    getUserPref()
+    init()
     #getSrcStatus()
 if __name__ == "__main__":
     print(main())
