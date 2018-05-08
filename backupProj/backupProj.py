@@ -13,7 +13,7 @@ import textwrap
 import string
 import random
 
-build = 'r0.1.5a'
+build = 'v0.1a6'
 now = datetime.datetime.now()
 
 class BackupItem:
@@ -76,7 +76,10 @@ def init():
                 id_gen_hold = BackupItem(1, locSrcPath, locisSrcRemote, locTgtPath, locisTgtRemote, now.isoformat())
 
                 with open('prefs.txt', 'a') as f:
-                    f.write('\n' + namer + ', '+ str(id_gen_hold.version) + ', ' + id_gen_hold.source + ', ' + str(id_gen_hold.isSrcRemote) + ', ' + id_gen_hold.target + ', ' + str(id_gen_hold.isTgtRemote) + ', ' + id_gen_hold.lastBackup)
+                    f.write('\n' + namer + ','+ str(id_gen_hold.version) + ',' + id_gen_hold.source + ',' + str(id_gen_hold.isSrcRemote) + ',' + id_gen_hold.target + ',' + str(id_gen_hold.isTgtRemote) + ',' + id_gen_hold.lastBackup)
+
+            elif whereTarget == 'n' or whereTarget == 'N':
+                print('Remote target backup functionality has not yet been implemented... sorry.')
 
         elif whereSource == 'n' or whereSource == 'N':
 
@@ -85,10 +88,7 @@ def init():
 
 
             locTgtPath
-
-        else:
-
-            print('only y/Y or n/N please.')
+                print('Remote source backup functionality has not yet been implemented... sorry.')
 
 
 
@@ -105,6 +105,6 @@ def backup(isLoc):
 def main():
     startUp()
     init()
-    #getSrcStatus()
+    getSrcStatus()
 if __name__ == "__main__":
     print(main())
