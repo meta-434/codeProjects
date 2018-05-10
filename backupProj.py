@@ -13,7 +13,7 @@ import textwrap
 import string
 import random
 
-build = 'v0.1a6'
+build = 'v0.1a7'
 now = datetime.datetime.now()
 
 class BackupItem:
@@ -53,11 +53,13 @@ def init():
     locisSrcRemote = False
     locisTgtRemote = False
 
-
-    prefs = input('Is there a prefs.txt file to import? y/N: ')
+    prefs = input('Is there a prefs.txt file to import for an existing backup? y/N: ')
     if prefs == 'y' or prefs == 'Y':
-            #import, read file.
-        print('')
+        f = open('prefs.txt', 'r')
+        f1 = f.readlines()
+        for x in f1:
+            print(x)
+
     elif prefs == 'n' or prefs == 'N':
 
         whereSource = input('Is source on a local disk? y/N: ')
@@ -77,20 +79,21 @@ def init():
 
                 with open('prefs.txt', 'a') as f:
                     f.write('\n' + namer + ','+ str(id_gen_hold.version) + ',' + id_gen_hold.source + ',' + str(id_gen_hold.isSrcRemote) + ',' + id_gen_hold.target + ',' + str(id_gen_hold.isTgtRemote) + ',' + id_gen_hold.lastBackup)
-
+                    f.close()
             elif whereTarget == 'n' or whereTarget == 'N':
                 print('Remote target backup functionality has not yet been implemented... sorry.')
 
         elif whereSource == 'n' or whereSource == 'N':
 
-            locisSrcRemote = True
-            locSrcPath = input('Enter full SSH address to source enclosing folder: ')
+            #if locisSrcRemote = True
+                #locSrcPath = input('Enter full SSH address to source enclosing folder: ')
 
+            #locTgtPath
+            print('Remote source backup functionality has not yet been implemented... sorry.')
 
-            locTgtPath
-                print('Remote source backup functionality has not yet been implemented... sorry.')
-
-
+    else:
+        print('input not recognized...')
+        return -1
 
 
 def getSrcStatus():
@@ -106,5 +109,6 @@ def main():
     startUp()
     init()
     getSrcStatus()
+
 if __name__ == "__main__":
     print(main())
