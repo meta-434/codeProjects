@@ -13,20 +13,17 @@ import textwrap
 import string
 import random
 
-build = 'v0.1a7'
+build = 'v0.2a1'
 now = datetime.datetime.now()
 
-class BackupItem:
-    def __init__(self, version, source, isSrcRemote, target, isTgtRemote, lastBackup):
+class payload:
+    def __init__(self, version, source, lastBackup):
         self.version = version
         self.source = source
-        self.isSrcRemote = isSrcRemote
-        self.target = target
-        self.isTgtRemote = isTgtRemote
         self.lastBackup = lastBackup
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+    return ''.join(random.choice(chars) for x in range(size))
 
 def startUp():
     global build
@@ -53,29 +50,19 @@ def init():
     locisSrcRemote = False
     locisTgtRemote = False
 
-    prefs = input('Is there a prefs.txt file to import for an existing backup? y/N: ')
-    if prefs == 'y' or prefs == 'Y':
-        f = open('prefs.txt', 'r')
-        f1 = f.readlines()
-        for x in f1:
-            print(x)
+#    prefs = input('Is there a prefs.txt file to import for an existing backup? y/N: ')
+#    if prefs == 'y' or prefs == 'Y':
+#        f = open('prefs.txt', 'r')
+#        f1 = f.readlines()
+#        for x in f1:
+#            print(x)
+#
 
-    elif prefs == 'n' or prefs == 'N':
+            payloadPath = input('Enter the full filepath to the source enclosing folder or single file: ')
+            id_gen_hold = id_generator()
+            namer = str(id_gen_hold)
 
-        whereSource = input('Is source on a local disk? y/N: ')
-
-        if whereSource == 'y' or whereSource == 'Y':
-
-            locisSrcRemote = False
-            locSrcPath = input('Enter the full filepath to the source enclosing folder: ')
-            whereTarget = input('Is target on a local disk? y/N: ')
-
-            if whereTarget == 'y' or whereTarget == 'Y':
-
-                locTgtPath = input('Enter the full filepath to the target folder: ')
-                id_gen_hold = id_generator()
-                namer = str(id_gen_hold)
-                id_gen_hold = BackupItem(1, locSrcPath, locisSrcRemote, locTgtPath, locisTgtRemote, now.isoformat())
+            id_gen_hold = BackupItem(payloadPath, now.isoformat())
 
                 with open('prefs.txt', 'a') as f:
                     f.write('\n' + namer + ','+ str(id_gen_hold.version) + ',' + id_gen_hold.source + ',' + str(id_gen_hold.isSrcRemote) + ',' + id_gen_hold.target + ',' + str(id_gen_hold.isTgtRemote) + ',' + id_gen_hold.lastBackup)
@@ -96,14 +83,11 @@ def init():
         return -1
 
 
-def getSrcStatus():
+def payloadLocation():
     if os.path.exists(source) and os.path.isdir(source):
         print(os.listdir(source))
     else:
         print('source either does not exist or is not a folder.')
-
-def backup(isLoc):
-    return 0
 
 def main():
     startUp()
