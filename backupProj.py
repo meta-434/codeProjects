@@ -1,11 +1,6 @@
-#Program should:
-#1. ask me where my backups are if they exist
-#1b. If they don't exist, where to start putting them
-#1c. This includes local directories, network locations, and remote internet locations
-#2. ask me the desired backup frequency
-#3. ask me if I want my backups compressed
-#4. ask what threshold of disk usage requires oldest backup deletion OR
-#4b. if backups should be placed somewhere else after disk is filled
+#created by Alex Hapgood
+#Started 02/2018
+import boto3
 import os
 import platform
 import datetime
