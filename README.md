@@ -32,8 +32,9 @@ Euler Projects To-Do
 
 backupProj Updates:
 ===================
-  v0.2a1(inc) - removed local backup options, pushed to later release. Current focus is on
-  backup and retrieval to and from remote AWS S3 bucket using boto3.
+v0.2a1(inc) - removed local backup options, pushed to later release. Current focus is on
+backup and retrieval to and from remote AWS S3 bucket using boto3.
+
 BackupProj Next steps:
 ======================
 1. Finish S3 bucket creation / upload and download based on user input and prefs.txt
