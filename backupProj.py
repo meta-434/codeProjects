@@ -8,8 +8,8 @@ import textwrap
 import string
 import random
 
-build = 'v0.2a1'
-now = datetime.datetime.now()
+build = 'v0.2a1(inc)'
+global now = datetime.datetime.now()
 
 class payload:
     def __init__(self, id, source, time):
@@ -17,13 +17,15 @@ class payload:
         self.id = id
         self.time = date
 
-    def writeToPrefs(self):
-        self.id = id_generator()
-        self.now = str(now)
+#Takes a payload instance, assigns variables, and writes to prefs.txt
+def writeToPrefs(payloadInstance):
+    payloadInstance.id = id_generator()
+    payloadInstance.time = str(now)
+    payloadInstance.source = input('Enter target source: ')
 
-        with open('prefs.txt', 'a') as f:
-            f.write('\n' + self.id  + ' | ' + self.source + ' | ' + self.now)
-            f.close()
+    with open('prefs.txt', 'a') as f:
+        f.write('\n' + self.id  + ' | ' + self.source + ' | ' + self.time)
+        f.close()
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
@@ -47,13 +49,9 @@ def startUp():
     print('current build is %s' % build)
 
 def init():
-    global now
-    locSrcPath = ''
-    locTgtPath = ''
-    locisSrcRemote = False
-    locisTgtRemote = False
+    payloadPath = ''
 
-    #!!!existPrefs = bool(input)
+    #existPrefs = bool(distutils.util.strtobool(input('Would you like to use an exiting prefs.txt file?')))
     payloadPath = input('Enter the full filepath to the source enclosing folder or single file: ')
 
 
@@ -62,11 +60,12 @@ def init():
 
 
 
-def payloadLocation():
-    if os.path.exists(source) and os.path.isdir(source):
+def payloadLocate():
+    if os.path.exists(payload.source) and os.path.isdir(payload.source):
         print(os.listdir(source))
+        return os.listdir(source)
     else:
-        print('source either does not exist or is not a folder.')
+        print('no such file or directory.')
 
 def main():
     startUp()
