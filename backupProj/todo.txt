@@ -1,0 +1,4 @@
+random 6 character string associated with backups will function as bucket name
+for EC2 storage
+
+need compression functionality for both local and remote backups
