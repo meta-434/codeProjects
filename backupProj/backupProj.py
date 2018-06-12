@@ -1,6 +1,8 @@
 #created by Alex Hapgood
 #Started 02/2018
+
 import boto3
+import sys
 import os
 import platform
 import datetime
@@ -8,20 +10,20 @@ import textwrap
 import string
 import random
 
-build = 'v0.2a1(inc)'
-global now = datetime.datetime.now()
+build = 'v0.2a3(inc)'
+
+now = datetime.datetime.now()
 
 class payload:
-    def __init__(self, id, source, time):
+    def __init__(self, source):
+        self.id = id_generator()
+        self.time = str(now)
         self.source = source
-        self.id = id
-        self.time = date
 
-#Takes a payload instance, assigns variables, and writes to prefs.txt
+
 def writeToPrefs(payloadInstance):
     payloadInstance.id = id_generator()
     payloadInstance.time = str(now)
-    payloadInstance.source = input('Enter target source: ')
 
     with open('prefs.txt', 'a') as f:
         f.write('\n' + self.id  + ' | ' + self.source + ' | ' + self.time)
@@ -49,28 +51,22 @@ def startUp():
     print('current build is %s' % build)
 
 def init():
-    payloadPath = ''
 
     #existPrefs = bool(distutils.util.strtobool(input('Would you like to use an exiting prefs.txt file?')))
-    payloadPath = input('Enter the full filepath to the source enclosing folder or single file: ')
+    _location = input('Enter the of file or directory: ')
 
-
-
-
-
-
-
-def payloadLocate():
-    if os.path.exists(payload.source) and os.path.isdir(payload.source):
-        print(os.listdir(source))
-        return os.listdir(source)
+    if os.path.exists(_location):
+        newPayload = payload(_location)
+        print(newPayload.id + ' | ' + newPayload.source + ' | ' + newPayload.time)
     else:
-        print('no such file or directory.')
+        print('No such file or directory.', file=sys.stderr)
+        sys.exit(1)
+
 
 def main():
     startUp()
     init()
-    getSrcStatus()
+    #getSrcStatus()
 
 if __name__ == "__main__":
     print(main())
